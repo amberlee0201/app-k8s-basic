@@ -32,6 +32,10 @@ jobs:
           #
           # - name: Build with Gradle 8.9
           #   run: gradle build
+
+      - name: check jar file
+        run: ls -al ./build/libs
+
       - name: Naming jar file
         run: mv ./build/libs/*.jar ./build/libs/app.jar
 
