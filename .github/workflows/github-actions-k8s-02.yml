@@ -1,6 +1,7 @@
 name: K8s App With Github Actions
 on:
-  workflow_dispatch
+  push:
+    branches: [ "main" ]
 
 jobs:
   ci:
@@ -13,6 +14,11 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+
+      - name: add application.properties
+        run: |
+          echo "${{ secrets.APP_YAML }}" >> src/main/resources/application.properties
+
       # Configure Gradle for optimal use in GitHub Actions, including caching of downloaded dependencies.
       # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
       - name: Setup Gradle
